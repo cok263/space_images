@@ -34,16 +34,26 @@ def download_hubble_image(id):
     response = requests.get(url)
     response.raise_for_status()
     answer = response.json()
-    images = [img['file_url'].replace('//imgsrc.hubblesite.org/hvi','https://media.stsci.edu')
-              for img in answer['image_files']]
+    images = [img['file_url'].replace(
+        '//imgsrc.hubblesite.org/hvi','https://media.stsci.edu'
+        ) for img in answer['image_files']]
     img_link = images[-1]
     download_img(img_link, 'images/{}.{}'.format(id, get_extension(img_link)))
 
 def main():
-    download_hubble_image(1)
-#    fetch_spacex_last_launch(12)
+    payload = {
+        'page' : 'all',
+        'collection_name' : 'wallpaper',
+    }
     
-    #print(*images, sep='\n')
+    url = 'http://hubblesite.org/api/v3/images/'
+    response = requests.get(url, params=payload)
+    response.raise_for_status()
+    answer = response.json()
+    images_id = [info['id'] for info in answer]
+    for id in images_id:
+        print('downloading image id={}...'.format(id))
+        download_hubble_image(id)
     
 
 if __name__ == '__main__':
