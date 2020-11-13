@@ -1,3 +1,4 @@
+import os
 from instabot import Bot
 
 

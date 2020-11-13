@@ -1,5 +1,5 @@
 import requests
-import os
+from os.path import splitext
 
 from image_tools import download_img
 
@@ -13,7 +13,7 @@ def download_hubble_image(id):
     img_link = 'http:{}'.format(images[-1])
     download_img(
         img_link,
-        'images/{id}{exp}'.format(id=id, exp=os.path.splitext(img_link)[-1])
+        'images/{id}{exp}'.format(id=id, exp=splitext(img_link)[-1])
     )
 
 
