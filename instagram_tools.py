@@ -2,7 +2,7 @@ import os
 from instabot import Bot
 
 
-def upload_to_instagram(login, password, images_dir):
+def upload_to_instagram(login, password, images_dir='images'):
     bot = Bot()
     bot.login(username=login, password=password)
     images = os.listdir(images_dir)

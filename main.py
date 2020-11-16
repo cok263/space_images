@@ -27,8 +27,8 @@ def main():
     login = os.getenv('LOGIN')
     password = os.getenv('PASSWORD')
     spacex_launch_id = 12
-    fetch_spacex_launch(spacex_launch_id)
-    download_hubble_image_collection()
+    fetch_spacex_launch(spacex_launch_id, args.images_dir)
+    download_hubble_image_collection(args.images_dir)
     upload_to_instagram(login, password, args.images_dir)
 
 
